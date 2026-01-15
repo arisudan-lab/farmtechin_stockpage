@@ -539,12 +539,6 @@ body {
   padding: 1.5rem;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
 .modal-actions {
   display: flex;
   justify-content: flex-end;
@@ -637,10 +631,6 @@ body {
   
   .search-input {
     min-width: auto;
-  }
-  
-  .form-row {
-    grid-template-columns: 1fr;
   }
   
   .inventory-table {

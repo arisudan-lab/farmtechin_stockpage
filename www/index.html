@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>StockFlow - Inventory Management</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
 </head>
+
 <body>
   <div class="app">
+
     <!-- Header -->
     <header class="header">
       <div class="header-content">
@@ -15,17 +17,18 @@
           <span class="logo-icon">📦</span>
           <h1>StockFlow</h1>
         </div>
-        <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+        <button class="theme-toggle" id="themeToggle">
           <span class="sun-icon">☀️</span>
           <span class="moon-icon">🌙</span>
         </button>
       </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main -->
     <main class="main">
-      <!-- Stats Dashboard -->
-      <section class="stats-grid" id="statsGrid">
+
+      <!-- Stats -->
+      <section class="stats-grid">
         <div class="stat-card">
           <div class="stat-icon blue">📊</div>
           <div class="stat-info">
@@ -33,6 +36,7 @@
             <span class="stat-label">Total Items</span>
           </div>
         </div>
+
         <div class="stat-card">
           <div class="stat-icon green">📦</div>
           <div class="stat-info">
@@ -40,6 +44,7 @@
             <span class="stat-label">Total Quantity</span>
           </div>
         </div>
+
         <div class="stat-card">
           <div class="stat-icon orange">🏷️</div>
           <div class="stat-info">
@@ -47,6 +52,7 @@
             <span class="stat-label">Categories</span>
           </div>
         </div>
+
         <div class="stat-card">
           <div class="stat-icon red">⚠️</div>
           <div class="stat-info">
@@ -56,25 +62,18 @@
         </div>
       </section>
 
-      <!-- Actions Bar -->
+      <!-- Actions -->
       <section class="actions-bar">
         <div class="search-filter">
-          <input 
-            type="text" 
-            class="search-input" 
-            id="searchInput" 
-            placeholder="Search by name or SKU..."
-          >
-          <select class="category-filter" id="categoryFilter">
+          <input id="searchInput" class="search-input" placeholder="Search by name or SKU..."/>
+          <select id="categoryFilter" class="category-filter">
             <option value="all">All Categories</option>
           </select>
         </div>
-        <button class="btn btn-primary" id="addItemBtn">
-          <span>+</span> Add Item
-        </button>
+        <button class="btn btn-primary" id="addItemBtn">+ Add Item</button>
       </section>
 
-      <!-- Inventory Table -->
+      <!-- Table -->
       <section class="table-container">
         <table class="inventory-table">
           <thead>
@@ -87,27 +86,27 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="inventoryTableBody">
-            <!-- Items will be inserted here -->
-          </tbody>
+          <tbody id="inventoryTableBody"></tbody>
         </table>
+
         <div class="empty-state" id="emptyState">
           <span class="empty-icon">📦</span>
           <p>No items in inventory</p>
-          <span class="empty-hint">Add your first item to get started</span>
+          <span class="empty-hint">Scan your first item to get started</span>
         </div>
       </section>
     </main>
 
-    <!-- Add/Edit Item Modal -->
+    <!-- Scan Modal -->
     <div class="modal-overlay" id="itemModal">
       <div class="modal">
         <div class="modal-header">
-          <h2 id="modalTitle">Add New Item</h2>
+          <h2>Add New Item</h2>
           <button class="modal-close" id="modalClose">&times;</button>
         </div>
-        <form class="modal-form" id="itemForm">
-          <!-- CAMERA VIEW -->
+
+        <div class="modal-form">
+          <!-- Camera -->
           <div class="camera-box">
             <video id="camera" autoplay playsinline></video>
             <div class="camera-overlay">
@@ -116,17 +115,41 @@
           </div>
 
           <p class="camera-hint">
-            Camera will scan the barcode automatically
+            Camera will scan barcode automatically
           </p>
-          <div class="modal-actions">
-            <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
-            <button type="submit" class="btn btn-primary" id="saveBtn">Save Item</button>
+
+          <!-- Scan Preview -->
+          <div class="scan-result hidden" id="scanResult">
+            <div class="scan-row">
+              <span>Item</span>
+              <strong id="scanName">Detecting…</strong>
+            </div>
+            <div class="scan-row">
+              <span>SKU</span>
+              <strong id="scanSKU">—</strong>
+            </div>
+            <div class="scan-row">
+              <span>Category</span>
+              <strong id="scanCategory">General</strong>
+            </div>
+            <div class="scan-row">
+              <span>Quantity</span>
+              <strong>+1</strong>
+            </div>
+            <div class="scan-row">
+              <span>Unit</span>
+              <strong id="scanUnit">pcs</strong>
+            </div>
+
+            <p class="scan-status success">
+              ✔ Item added automatically
+            </p>
           </div>
-        </form>
+        </div>
       </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
+    <!-- Delete Modal -->
     <div class="modal-overlay" id="deleteModal">
       <div class="modal modal-small">
         <div class="modal-header">
@@ -134,8 +157,8 @@
           <button class="modal-close" id="deleteModalClose">&times;</button>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to delete "<strong id="deleteItemName"></strong>"?</p>
-          <p class="text-muted">This action cannot be undone.</p>
+          <p>Delete <strong id="deleteItemName"></strong>?</p>
+          <p class="text-muted">This action cannot be undone</p>
         </div>
         <div class="modal-actions">
           <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
@@ -144,8 +167,9 @@
       </div>
     </div>
 
-    <!-- Toast Container -->
+    <!-- Toast -->
     <div class="toast-container" id="toastContainer"></div>
+
   </div>
 
   <script src="script.js"></script>
