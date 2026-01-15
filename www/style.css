@@ -1,9 +1,3 @@
-/* ==========================================
-   StockFlow - Inventory Management Styles
-   A clean, modern, startup-style UI
-   ========================================== */
-
-/* CSS Variables for theming */
 :root {
   /* Light theme colors */
   --bg-primary: #faf9f7;
@@ -545,44 +539,6 @@ body {
   padding: 1.5rem;
 }
 
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  font-size: 0.875rem;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  transition: all 0.2s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -717,4 +673,80 @@ body {
   .stat-value {
     font-size: 1.5rem;
   }
+}
+
+/* Camera Scanner UI */
+.camera-box {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: black;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.camera-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-overlay {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.camera-overlay span {
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.camera-hint {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.scan-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.scan-result.hidden {
+  display: none;
+}
+
+.scan-result h4 {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.scan-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.scan-status {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.scan-status.success {
+  color: var(--success);
 }

@@ -553,3 +553,48 @@ function init() {
 
 // Start the app when DOM is ready
 document.addEventListener('DOMContentLoaded', init);
+
+const video = document.getElementById("camera");
+let cameraStream = null;
+
+/* Start camera */
+async function startCamera() {
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" }
+    });
+    video.srcObject = cameraStream;
+  } catch (err) {
+    showToast("Camera access denied", "error");
+  }
+}
+
+/* Stop camera */
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach(track => track.stop());
+    cameraStream = null;
+  }
+}
+
+/* Open modal */
+function openAddModal() {
+  document.getElementById("itemModal").classList.add("active");
+  startCamera();
+}
+
+/* Close modal */
+function closeItemModal() {
+  document.getElementById("itemModal").classList.remove("active");
+  stopCamera();
+}
+
+/* Buttons */
+document.getElementById("addItemBtn").onclick = openAddModal;
+document.getElementById("modalClose").onclick = closeItemModal;
+document.getElementById("cancelBtn").onclick = closeItemModal;
+
+/* Temporary save */
+document.getElementById("saveBtn").onclick = () => {
+  showToast("Barcode scanning logic pending", "error");
+};

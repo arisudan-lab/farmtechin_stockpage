@@ -107,6 +107,17 @@
           <button class="modal-close" id="modalClose">&times;</button>
         </div>
         <form class="modal-form" id="itemForm">
+          <!-- CAMERA VIEW -->
+          <div class="camera-box">
+            <video id="camera" autoplay playsinline></video>
+            <div class="camera-overlay">
+              <span>Align barcode inside box</span>
+            </div>
+          </div>
+
+          <p class="camera-hint">
+            Camera will scan the barcode automatically
+          </p>
           <div class="modal-actions">
             <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
             <button type="submit" class="btn btn-primary" id="saveBtn">Save Item</button>
