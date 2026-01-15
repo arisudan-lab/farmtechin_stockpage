@@ -84,11 +84,22 @@ function showToast(msg, type = "success") {
 // ==========================================
 // Theme
 // ==========================================
-elements.themeToggle.addEventListener("click", () => {
-  const dark = document.documentElement.getAttribute("data-theme") === "dark";
-  document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
-});
+function loadTheme() {
+  const savedTheme = localStorage.getItem("stockflow_theme");
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  
+  // Priority: 1. Saved User Pref, 2. System Pref, 3. Default to Light
+  const theme = savedTheme || (systemDark ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", theme);
+}
 
+elements.themeToggle.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme");
+  const next = current === "dark" ? "light" : "dark";
+  
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("stockflow_theme", next); // Save user preference
+});
 // ==========================================
 // Stats
 // ==========================================
@@ -278,6 +289,7 @@ elements.modalClose.onclick = closeItemModal;
 // Init
 // ==========================================
 function init() {
+  loadTheme();
   loadInventory();
   updateStats();
   updateCategoryFilter();
