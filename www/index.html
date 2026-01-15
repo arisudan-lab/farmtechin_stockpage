@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow - Inventory Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">📦</span>
+          <h1>StockFlow</h1>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+          <span class="sun-icon">☀️</span>
+          <span class="moon-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Stats Dashboard -->
+      <section class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-icon blue">📊</div>
+          <div class="stat-info">
+            <span class="stat-value" id="totalItems">0</span>
+            <span class="stat-label">Total Items</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">📦</div>
+          <div class="stat-info">
+            <span class="stat-value" id="totalQuantity">0</span>
+            <span class="stat-label">Total Quantity</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon orange">🏷️</div>
+          <div class="stat-info">
+            <span class="stat-value" id="totalCategories">0</span>
+            <span class="stat-label">Categories</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red">⚠️</div>
+          <div class="stat-info">
+            <span class="stat-value" id="lowStockCount">0</span>
+            <span class="stat-label">Low Stock</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Actions Bar -->
+      <section class="actions-bar">
+        <div class="search-filter">
+          <input 
+            type="text" 
+            class="search-input" 
+            id="searchInput" 
+            placeholder="Search by name or SKU..."
+          >
+          <select class="category-filter" id="categoryFilter">
+            <option value="all">All Categories</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="addItemBtn">
+          <span>+</span> Add Item
+        </button>
+      </section>
+
+      <!-- Inventory Table -->
+      <section class="table-container">
+        <table class="inventory-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>SKU</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Unit</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="inventoryTableBody">
+            <!-- Items will be inserted here -->
+          </tbody>
+        </table>
+        <div class="empty-state" id="emptyState">
+          <span class="empty-icon">📦</span>
+          <p>No items in inventory</p>
+          <span class="empty-hint">Add your first item to get started</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Add/Edit Item Modal -->
+    <div class="modal-overlay" id="itemModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modalTitle">Add New Item</h2>
+          <button class="modal-close" id="modalClose">&times;</button>
+        </div>
+        <form class="modal-form" id="itemForm">
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="saveBtn">Save Item</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal">
+      <div class="modal modal-small">
+        <div class="modal-header">
+          <h2>Delete Item</h2>
+          <button class="modal-close" id="deleteModalClose">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete "<strong id="deleteItemName"></strong>"?</p>
+          <p class="text-muted">This action cannot be undone.</p>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
+          <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
